@@ -1,0 +1,15 @@
+{
+    "buildTool": "@tyrant/tyrant-vue-build",
+    "devDir": "dev",
+    "buildDir": "build",
+    "releaseDir": "rls",
+    "dev": {
+        "resourcePrefix": "http://localhost:8000/"
+    },
+    "prod": {
+        "resourcePrefix": ""
+    },
+    "build": {
+        "resourcePrefix": ""
+    }
+}

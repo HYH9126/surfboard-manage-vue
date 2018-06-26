@@ -1,0 +1,24 @@
+{
+  "name": "@tyrant/tyrant-vue-proj",
+  "version": "1.0.6",
+  "description": "vue模板项目",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "fglxy",
+  "license": "ISC",
+  "dependencies": {
+    "@tyrant/tyrant-vue-build": "^1.0.10",
+    "axios": "^0.16.2",
+    "element-ui": "^2.4.2",
+    "vconsole": "^3.0.0",
+    "vue-i18n": "^5.0.3"
+  },
+  "devDependencies": {
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1"
+  }
+}
