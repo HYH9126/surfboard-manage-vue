@@ -12,6 +12,7 @@ import 'element-ui/lib/theme-chalk/index.css'
 import VueI18n from 'vue-i18n'
 import enLocale from 'element-ui/lib/locale/lang/en'
 import zhLocale from 'element-ui/lib/locale/lang/zh-CN'
+import './style/global.css'
 
 Vue.use(VueI18n)
 Vue.use(ElementUI)
