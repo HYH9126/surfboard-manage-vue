@@ -30,7 +30,23 @@ const js = (requires) => {
     return _js;
 }
 
+const component = (requires) => {
+    let _components = [];
+    requires.keys().forEach(key => {
+        let cacheKey = key.replace(/^\.\/(.*)\.\w+$/, '$1')
+        if (cacheKey.includes('-')) {
+            cacheKey = cacheKey.replace(/-(\w)/g, function (x) { return x.slice(1).toUpperCase(); })
+        }
+        if (!/[A-Z]/.test(cacheKey.substring(0, 1))) {
+            cacheKey = cacheKey.substring(0, 1).toUpperCase() + cacheKey.substring(1)
+        }
+        _components[cacheKey] = requires(key).default
+    })
+    return _components
+}
+
 module.exports = {
     router: router,
-    js: js
+    js: js,
+    component: component
 }
