@@ -10,9 +10,6 @@
                     <el-menu
                         :default-active="this.$route.path"
                         class="el-menu-vertical-demo"
-                        background-color="#194D5B"
-                        text-color="#fff"
-                        active-text-color="#ec9600"
                         router
                         @select="handleSelect"
                         >
@@ -21,7 +18,7 @@
                             v-for="item in menuList" 
                             :key="item.path"
                             >
-                                <img :src="item.img[0]" />
+                                <img :src="item.img[1]" />
                                 <span>{{item.title}}</span>
                         </el-menu-item>
                     </el-menu>
@@ -49,7 +46,7 @@ export default {
                 {title: '仓库管理', path: '/depot', img: [require('./sssets/images/depot.png'), require('./sssets/images/depot-active.png')]},
                 {title: '员工管理', path: '/worker', img: [require('./sssets/images/worker.png'), require('./sssets/images/worker-active.png')]},
                 {title: '权限管理', path: '/group', img: [require('./sssets/images/group.png'), require('./sssets/images/group-active.png')]},
-                {title: '数据管理', path: '/data', img: [require('./sssets/images/data.png'), require('./sssets/images/data.png')]}
+                {title: '数据管理', path: '/data', img: [require('./sssets/images/data.png'), require('./sssets/images/data-active.png')]}
             ],
             selectIndex: Number,
             transition: {}
@@ -57,7 +54,6 @@ export default {
     },
     methods: {
         handleSelect(index){
-            console.log(index)
         }
     },
     watch: {
@@ -93,15 +89,11 @@ export default {
     height: 100%;
 }
 .el-header{
-    background-color: #194D5B;
     padding: 0 10px;
-}
-.el-aside{
-    background-color: #194D5B;
+    border-bottom: 1px solid rgb(230, 230, 230);
 }
 .el-main{
-    background-color: #c3e0ee;
-    padding: 20px;
+    padding: 12px 0px 0px 20px;
 }
 .logo{
     display: block;
@@ -117,7 +109,6 @@ export default {
     font-weight: 400;
     font-size: 24px;
     line-height: 48px;
-    color:#fff;
 }
 
 </style>

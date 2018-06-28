@@ -34,6 +34,7 @@ const component = (requires) => {
     let _components = [];
     requires.keys().forEach(key => {
         let cacheKey = key.replace(/^\.\/(.*)\.\w+$/, '$1')
+        console.log(cacheKey)
         if (cacheKey.includes('-')) {
             cacheKey = cacheKey.replace(/-(\w)/g, function (x) { return x.slice(1).toUpperCase(); })
         }

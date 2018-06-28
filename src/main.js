@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from '@/routers'
 import store from '@/vuex/store'
-import componentList from '@/components'
+// import componentList from '@/components'
 import '@/filters'
 /* @if NODE_ENV=='dev' */
 import 'vconsole'
@@ -31,7 +31,6 @@ new Vue({
     store,
     template: '<App/>',
     components: {
-        App,
-        componentList
+        App
     }
 })
