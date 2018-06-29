@@ -22,11 +22,11 @@
                 <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :pager-count="pagerCount"
                 :current-page.sync="currentPage"
                 :page-size="pageSize"
                 layout="prev, pager, next, jumper"
-                :total="total">
+                :total="total"
+                :pager-count="pagerCount">
                 </el-pagination>
             </div>
         </div>
@@ -346,7 +346,7 @@
                 totalPage: 50,
                 currentPage: 10,
                 pageSize: 20,
-                pagerCount: 20
+                pagerCount: 19
             }
         },
         methods: {

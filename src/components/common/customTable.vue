@@ -9,14 +9,16 @@
                 :label="item.label" 
                 :width="item.width"
             >
+            </el-table-column>
+            <el-table-column label="操作" width="150">
                 <template slot-scope="scope">
-                    <div v-for="(item2, index) in scope.row" :key="index">
-                        <div v-if="textOrcheck[index]">{{item2}}</div>
-                        <el-checkbox-button v-else v-model="scope.row[item2]">
-                            <i v-if="item2" class="el-icon-check"></i>
-                            <i v-else class="el-icon-close"></i>
-                        </el-checkbox-button>
-                    </div>
+                    <el-button
+                    size="mini"
+                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
+                    <el-button
+                    size="mini"
+                    type="danger"
+                    @click="handleDelete(scope.$index, scope.row)">删除</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -27,18 +29,13 @@
                 :model="formInlines" 
                 class="demo-form-inline" 
             >
-                <div v-for="(item, index) in columDatas" :key="item.label">
-                    <el-input
-                        v-if="textOrcheck[index]"
-                        v-model="formInlines[item.prop]"
-                        v-bind:style="{width: item.width+'px'}"
-                        :autofocus="isfocus[index]"
-                    ></el-input>
-                    <el-checkbox-button v-else v-model="scope.row[item2]">
-                        <i v-if="item2" class="el-icon-check"></i>
-                        <i v-else class="el-icon-close"></i>
-                    </el-checkbox-button>
-                </div>
+                <el-input
+                    v-for="(item, index) in columDatas"
+                    :key="item.label"
+                    v-model="formInlines[item.prop]"
+                    v-bind:style="{width: item.width+'px'}"
+                    :autofocus="isfocus[index]"
+                ></el-input>
                 <el-form-item style="width:100px;margin:0;padding:0px 20px;background-color:#fff;">
                     <el-button
                         type="success"
@@ -62,84 +59,20 @@
                 >
                     添加浪板
                 </el-button>
-                <el-button
-                    type="primary"
-                    plain style="float:right;width:150px;"
-                    @click="submit"
-                >
-                    保存设置
-                </el-button>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import customTable from '@/components/common/customTable'
-
     export default {
-        name: 'group',
-        components: {
-            customTable
-        },
+        name: 'custom-table',
+        props: ['tabledata-prop', 'columdata-prop', 'forminline-prop'],
         data() {
             return {
-                tableDatas: [{
-                    name: 'Admin',
-                    board: true,
-                    depot: true,
-                    work: true,
-                    group: true,
-                    data: true
-                }, {
-                    name: 'Leader',
-                    board: true,
-                    depot: true,
-                    work: true,
-                    group: false,
-                    data: false
-                }, {
-                    name: 'Worker',
-                    board: true,
-                    depot: false,
-                    work: false,
-                    group: false,
-                    data: false
-                }],
-                columDatas: [{
-                    prop: 'name',
-                    label: 'Name',
-                    width: '180'
-                }, {
-                    prop: 'board',
-                    label: '浪板管理',
-                    width: '60'
-                }, {
-                    prop: 'depot',
-                    label: '仓库管理',
-                    width: '60'
-                }, {
-                    prop: 'work',
-                    label: '员工管理',
-                    width: '60'
-                }, {
-                    prop: 'group',
-                    label: '权限管理',
-                    width: '60'
-                }, {
-                    prop: 'data',
-                    label: '数据管理',
-                    width: '60'
-                }],
-                forminLines: {
-                    name: '',
-                    board: '',
-                    depot: '',
-                    work: '',
-                    group: '',
-                    data: ''
-                },
-                textOrcheck: [],
+                tableDatas: this.tabledataProp,
+                columDatas: this.columdataProp,
+                formInlines: this.forminlineProp,
                 width: 1000,
                 isfocus: [true],
                 inputcolumShow: false,
@@ -186,9 +119,6 @@
                 let obj = {...this.tableDatas[this.tableDatas.length-1]};
                 this.formInlines = obj;
             },
-            submit() {
-                console.log(this.tableDatas)
-            },
             // 显示/隐藏输入栏
             changeinputcolumshow() {
                 this.inputcolumShow = !this.inputcolumShow;
@@ -210,15 +140,26 @@
             }, 151)
             this.rowIndex = this.tableDatas.length;
             this.inputcolumnPosition = 36+this.tableDatas.length*41;
-            let arr = [];
-            for (let key in this.tableDatas[0]){
-                if (typeof(this.tableDatas[0][key]) === String){
-                    arr.push(true);
-                } else {
-                    arr.push(false);
-                }
-            }
-            this.textOrcheck = [...arr];
         }
     }
 </script>
+
+<style lang="less" scoped>
+    .bg{
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: #000;
+        opacity: 0.1;
+        z-index: 1000;
+    }
+    .inputColumn{
+        position: absolute;
+        z-index: 10000;
+    }
+    .addButton{
+        width: 100%;
+    }
+</style>

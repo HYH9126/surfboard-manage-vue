@@ -1,43 +1,20 @@
 <template>
-    <div>
-        <el-table :data="tableData" size="mini" border stripe style="width:901px;">
-            <el-table-column
-                v-for="item in columData" 
-                :key="item.prop" 
-                :prop="item.prop" 
-                :label="item.label" 
-                :width="item.width"
-            >
-            </el-table-column>
-            <el-table-column label="操作" width="150">
-                <template slot-scope="scope">
-                    <el-button
-                    size="mini"
-                    @click="handleEdit(scope.$index, scope.row)">编辑</el-button>
-                    <el-button
-                    size="mini"
-                    type="danger"
-                    @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-                </template>
-            </el-table-column>
-        </el-table>
-        <div class="add">
-            <el-form v-show="addShow" :inline="true" :model="formInline" class="demo-form-inline" style="width:900px;">
-                <el-input v-for="item in columData" :key="item.label" v-model="formInline[item.prop]" v-bind:style="{width: item.width+'px'}"></el-input>
-                <el-form-item style="width:100px;margin:0;padding:0px 20px;">
-                    <el-button type="success" @click="onSubmit" icon="el-icon-check" circle></el-button>
-                    <el-button type="danger" icon="el-icon-delete" circle @click="changeAddshow"></el-button>
-                </el-form-item>
-            </el-form>
-            <div class="addButton" v-show="!addShow">
-                <el-button type="primary" plain style="float:right;width:150px;" @click="changeAddshow">添加浪板</el-button>
-            </div>
-        </div>
-    </div>
+    <custom-table 
+        v-bind:tabledata-prop="tableData" 
+        v-bind:columdata-prop="columData" 
+        v-bind:forminline-prop="forminLine" 
+        addbtnTitle="添加浪板"
+        ></custom-table>
 </template>
 
 <script>
+    import customTable from '@/components/common/customTable'
+
     export default {
+        name: 'board',
+        components: {
+            customTable
+        },
         data() {
             return {
                 tableData: [{
@@ -118,7 +95,7 @@
                     label: '序号',
                     width: '80'
                 }],
-                formInline: {
+                forminLine: {
                     id: '',
                     productionDate: '',
                     depot: '',
@@ -126,37 +103,21 @@
                     type: '',
                     size: '',
                     num: ''
-                },
-                addShow: false
+                }
             }
         },
         methods: {
-            handleEdit(index, row) {
-                console.log(index, row);
-            },
-            handleDelete(index, row) {
-                console.log(index, row);
-            },
-            onSubmit() {
-                this.addShow = !this.addShow;
-                let obj = {...this.formInline};
-                this.tableData.push(formInline);
-                this.formInline = {...obj};
-                console.log('submit!');
-            },
-            changeAddshow() {
-                this.addShow = !this.addShow
+            // 请求数据
+            getData(){
+
             }
+        },
+        creat: function() {
+            // getData();
         }
     }
 </script>
 
 <style lang="less" scoped>
-    .add{
-        width: 901px;
-    }
-    .addButton{
-        width: 100%;
-    }
 </style>
 
